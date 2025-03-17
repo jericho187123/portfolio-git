@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio &#9733;</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #c11111, #ff5733);
+            color: #fff;
+            text-align: center;
+            transition: background 0.5s ease-in-out;
+        }
+        .dark-mode {
+            background: linear-gradient(45deg, #1b1b1b, #333);
+            color: #ddd;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .dark-mode header {
+            background: rgba(30, 30, 30, 0.9);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffeb3b;
+        }
+        .toggle-btn, .back-to-top {
+            position: fixed;
+            background: #ffeb3b;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out;
+        }
+        .toggle-btn {
+            top: 10px;
+            right: 10px;
+        }
+        .back-to-top {
+            bottom: 20px;
+            right: 20px;
+            background: #ff9800;
+            display: none;
+        }
+        .toggle-btn:hover, .back-to-top:hover {
+            background: #e6c200;
+        }
+        .skills-bar div {
+            width: 0;
+            height: 25px;
+            background: #ffeb3b;
+            text-align: center;
+            line-height: 25px;
+            color: black;
+            transition: width 1.5s ease-in-out;
+        }
+        #contact {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+        #contact input,
+        #contact textarea,
+        #contact button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+        #contact button {
+            background: #ff9800;
+            color: white;
+            cursor: pointer;
+        }
+        #contact button:hover {
+            background: #e68900;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JERICHO ADRIAN</h1>
+        <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Mode</button>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="about">
+            <h2>About</h2>
+            <p>This is a brief introduction about our Portfolio.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <form onsubmit="return validateForm()">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <span class="error" id="nameError"></span>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <span class="error" id="emailError"></span>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <span class="error" id="messageError"></span>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+        <section id="map">
+            <h2>Our Location</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15698.482106265524!2d123.8943!3d10.3157!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339e32c7bf4bfeb7%3A0xabae95d2e909e573!2s7VVW%2BQC%20Cebu%20City%2C%20Cebu!5e0!3m2!1sen!2sph!4v1617701260123!5m2!1sen!2sph" 
+                width="600" height="450" frameborder="0" allowfullscreen loading="lazy">
+            </iframe>
+        </section>
+        <section id="Video">
+            <h2>Our Video</h2>
+            <iframe 
+                src="https://www.youtube.com/embed/6egO0WgqYaU"
+                width="600" height="450" frameborder="0" allowfullscreen loading="lazy">
+            </iframe>
+        </section>
+    </main>
+    <button class="back-to-top" onclick="scrollToTop()">Top</button>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.onscroll = function() {
+            document.querySelector('.back-to-top').style.display = (window.scrollY > 200) ? 'block' : 'none';
+        };
+        function validateForm() {
+            let name = document.getElementById('name');
+            let email = document.getElementById('email');
+            let message = document.getElementById('message');
+            let isValid = true;
+            document.getElementById('nameError').textContent = name.value ? '' : 'Name is required';
+            document.getElementById('emailError').textContent = email.value.includes('@') ? '' : 'Invalid email';
+            document.getElementById('messageError').textContent = message.value ? '' : 'Message is required';
+            return name.value && email.value.includes('@') && message.value;
+        }
+    </script>
+</body>
+</html>
